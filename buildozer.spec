@@ -12,6 +12,7 @@ orientation = portrait
 fullscreen = 0
 
 android.minapi = 21
+android.accept_sdk_license = True
 
 [buildozer]
 
