@@ -55,9 +55,14 @@ class JumpscareApp(App):
 
     def trigger_jumpscare(self, dt):
         self.status_label.text = "BOO!"
+        self.scare_image.opacity = 1
+        Clock.schedule_once(
+            self.restart, 2.5
+        )
+    def restart(self, dt)    
+        self.scare_image.opacity = 0
         self.start_button.text = "Start again"
         self.start_button.disabled = False
-        self.scare_image.opacity = 1
 
 
 
