@@ -63,7 +63,7 @@ class JumpscareApp(App):
         self.scare_image.opacity = 0
         self.start_button.text = "Start again"
         self.start_button.disabled = False
-
+        self.status_label.text = "Wanna go again :)?"
 
 
 JumpscareApp().run()
