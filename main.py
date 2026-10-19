@@ -6,6 +6,7 @@ from kivy.clock import Clock
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
+from kivy.uix.image import Image
 
 
 class JumpscareApp(App):
@@ -46,10 +47,23 @@ class JumpscareApp(App):
             self.trigger_jumpscare, 5
         )
 
-    def trigger_jumpscare(self, dt):
-        self.status_label.text = "BOO!"
-        self.start_button.text = "Start again"
-        self.start_button.disabled = False
+def trigger_jumpscare(self, dt):
+    self.start_button.text = "Start again"
+    self.start_button.disabled = False
+    
+    # Check if the image widget already exists, create it if not
+    if not hasattr(self, 'scare_image'):
+        # Replace 'your_image.png' with your actual image filename
+        self.scare_image = Image(
+            source='Polar Owl of Darknedd.jpeg', 
+            size_hint=(0.8, 0.8), 
+            pos_hint={'center_x': 0.5, 'center_y': 0.5}
+        )
+        self.add_widget(self.scare_image)
+    else:
+        # Make sure it's visible if it was hidden previously
+        self.scare_image.opacity = 1
+
 
 
 JumpscareApp().run()
