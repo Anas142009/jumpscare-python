@@ -33,9 +33,15 @@ class JumpscareApp(App):
         self.start_button.bind(
             on_press=self.start_jumpscare
         )
-
+        self.scare_image = Image(
+            source='Polar Owl of Darknedd.jpeg', 
+            size_hint=(0.8, 0.8), 
+            pos_hint={'center_x': 0.5, 'center_y': 0.5}
+        )
+        self.layout.add_widget(self.scare_image)
         self.layout.add_widget(self.status_label)
         self.layout.add_widget(self.start_button)
+        self.scare_image.opacity = 0
 
         return self.layout
 
@@ -47,21 +53,10 @@ class JumpscareApp(App):
             self.trigger_jumpscare, 5
         )
 
-def trigger_jumpscare(self, dt):
-    self.status_label.text = "BOO!"
-    self.start_button.text = "Start again"
-    self.start_button.disabled = False
-    # Check if the image widget already exists, create it if not
-    if not hasattr(self, 'scare_image'):
-        # Replace 'your_image.png' with your actual image filename
-        self.scare_image = Image(
-            source='Polar Owl of Darknedd.jpeg', 
-            size_hint=(0.8, 0.8), 
-            pos_hint={'center_x': 0.5, 'center_y': 0.5}
-        )
-        self.add_widget(self.scare_image)
-    else:
-        # Make sure it's visible if it was hidden previously
+    def trigger_jumpscare(self, dt):
+        self.status_label.text = "BOO!"
+        self.start_button.text = "Start again"
+        self.start_button.disabled = False
         self.scare_image.opacity = 1
 
 
