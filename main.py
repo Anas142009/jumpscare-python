@@ -48,9 +48,9 @@ class JumpscareApp(App):
         )
 
 def trigger_jumpscare(self, dt):
+    self.status_label.text = "BOO!"
     self.start_button.text = "Start again"
     self.start_button.disabled = False
-    
     # Check if the image widget already exists, create it if not
     if not hasattr(self, 'scare_image'):
         # Replace 'your_image.png' with your actual image filename
