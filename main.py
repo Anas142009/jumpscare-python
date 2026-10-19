@@ -35,7 +35,7 @@ class JumpscareApp(App):
         )
         self.scare_image = Image(
             source='Polar Owl of Darknedd.jpeg', 
-            size_hint=(0.8, 0.8), 
+            size_hint=(1, 1), 
             pos_hint={'center_x': 0.5, 'center_y': 0.5}
         )
         self.layout.add_widget(self.scare_image)
