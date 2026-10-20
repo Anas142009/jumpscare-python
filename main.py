@@ -21,6 +21,8 @@ class JumpscareApp(App):
         self.status_label = Label(
             text="Ready when you are!",
             font_size="24sp"
+            size_hint_y=None,
+            height=50
         )
 
         self.start_button = Button(
@@ -36,7 +38,8 @@ class JumpscareApp(App):
         self.scare_image = Image(
             source='Polar Owl of Darknedd.jpeg', 
             size_hint=(1, 1), 
-            pos_hint={'center_x': 0.5, 'center_y': 0.5}
+            pos_hint={'center_x': 0.5, 'center_y': 0.5},
+            allow_stretch=True
         )
         self.layout.add_widget(self.scare_image)
         self.layout.add_widget(self.status_label)
