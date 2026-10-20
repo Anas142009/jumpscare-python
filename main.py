@@ -43,9 +43,7 @@ class JumpscareApp(App):
             height=70
         )
 
-        self.start_button.bind(
-            on_press=self.start_jumpscare
-        )
+        self.start_button.bind(on_press=self.start_jumpscare)
         self.scare_image = Image(
             source='Polar Owl of Darknedd.jpeg', 
             size_hint=(1, 1), 
@@ -65,7 +63,7 @@ class JumpscareApp(App):
         self.start_button.disabled = True
 
         Clock.schedule_once(
-            self.trigger_jumpscare, 5
+            self.trigger_jumpscare, 10
         )
 
     def trigger_jumpscare(self, dt):
@@ -82,6 +80,8 @@ class JumpscareApp(App):
         self.scare_image.opacity = 0
         self.start_button.text = "Start again"
         self.start_button.disabled = False
+        self.start_button.unbind(on_press=self.start_jumpscare)
+        self.start_button.bind(on_press=self.trigger_jumpscare)
         self.status_label.text = "Wanna go again :)?"
 
 
