@@ -40,7 +40,7 @@ class JumpscareApp(App):
             size_hint=(1, 1), 
             pos_hint={'center_x': 0.5, 'center_y': 0.5},
             allow_stretch=True,
-            keep_ratio=False
+            keep_ratio=True
         )
         self.layout.add_widget(self.scare_image)
         self.layout.add_widget(self.status_label)
