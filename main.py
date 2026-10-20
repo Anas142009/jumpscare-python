@@ -12,6 +12,12 @@ from kivy.core.audio import SoundLoader
 class JumpscareApp(App):
 
     def build(self):
+        self.scare_sound = SoundLoader.load("dragon-studio-scary-scream-401725.mp3")
+        if self.scare_sound:
+            self.scare_sound.volume = 1
+            self.scare_sound.loop = False
+        #preload the sound so that it doesn't cause lag and check if it's available before the button press to dismiss crashes.
+        
         self.layout = BoxLayout(
             orientation="vertical",
             padding=30,
@@ -60,16 +66,13 @@ class JumpscareApp(App):
     def trigger_jumpscare(self, dt):
         self.status_label.text = "BOO!"
         self.scare_image.opacity = 1
-        self.play_audio
+        self.play_audio() # Remember the parenthesis()
         Clock.schedule_once(
             self.restart, 3.5
         )
-    def play_audio(self, instance):
-        sound = SoundLoader.load("dragon-studio-scary-scream-401725.mp3")
-        sound.volume = 1
-        sound.loop = False
-
-        sound.play()
+    def play_audio(self):
+        if self.scare_sound:
+            self.scare_sound.play()
     def restart(self, dt):    
         self.scare_image.opacity = 0
         self.start_button.text = "Start again"
