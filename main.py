@@ -8,7 +8,7 @@ from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.image import Image
 from kivy.core.audio import SoundLoader
-
+from kivy.uix.floatlayout import FloatLayout
 class JumpscareApp(App):
 
     def build(self):
@@ -23,24 +23,20 @@ class JumpscareApp(App):
             self.scare_sound.loop = False
         #preload the sound so that it doesn't cause lag and check if it's available before the button press to dismiss crashes.
         
-        self.layout = BoxLayout(
-            orientation="vertical",
-            padding=30,
-            spacing=20
-        )
-
+        self.layout = FloatLayout()
         self.status_label = Label(
             text="Ready when you are!",
             font_size="24sp",
             size_hint_y=None,
-            height=50
+            height=50,
+            pos_hint={'center_x': 0.5, 'center_y': 0.5}
         )
 
         self.start_button = Button(
             text="Start",
             font_size="24sp",
-            size_hint_y=None,
-            height=70
+            size_hint=(1, 0.15),
+            pos_hint={'right': 0.95, 'y': 0.05}
         )
 
         self.start_button.bind(on_press=self.start_jumpscare)
@@ -51,9 +47,9 @@ class JumpscareApp(App):
             allow_stretch=True,
             keep_ratio=False
         )
-        self.layout.add_widget(self.scare_image)
         self.layout.add_widget(self.status_label)
         self.layout.add_widget(self.start_button)
+        self.layout.add_widget(self.scare_image)
         self.scare_image.opacity = 0
         self.ambience.play()
         return self.layout
