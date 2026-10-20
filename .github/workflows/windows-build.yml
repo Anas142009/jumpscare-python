@@ -24,7 +24,7 @@ jobs:
 
     - name: Build with PyInstaller
       run: |
-        pyinstaller --onefile --windowed --add-data "Polar Owl of Darknedd.jpeg;." --add-data "dragon-studio-scary-scream-401725.mp3;." --add-data "Ambience.mp3" main.py
+        pyinstaller --onefile --windowed --add-data "Polar Owl of Darknedd.jpeg;." --add-data "dragon-studio-scary-scream-401725.mp3;." --add-data "Ambience.mp3;." main.py
 
     - name: Upload EXE as Artifact
       uses: actions/upload-artifact@v4
