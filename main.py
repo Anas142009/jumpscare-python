@@ -20,7 +20,7 @@ class JumpscareApp(App):
 
         self.status_label = Label(
             text="Ready when you are!",
-            font_size="24sp"
+            font_size="24sp",
             size_hint_y=None,
             height=50
         )
@@ -39,7 +39,8 @@ class JumpscareApp(App):
             source='Polar Owl of Darknedd.jpeg', 
             size_hint=(1, 1), 
             pos_hint={'center_x': 0.5, 'center_y': 0.5},
-            allow_stretch=True
+            allow_stretch=True,
+            keep_ratio=False
         )
         self.layout.add_widget(self.scare_image)
         self.layout.add_widget(self.status_label)
