@@ -12,6 +12,11 @@ from kivy.core.audio import SoundLoader
 class JumpscareApp(App):
 
     def build(self):
+        self.ambience = SoundLoader.load("Ambience.mp3")
+        if self.ambience:
+            self.ambience.volume = 0.8
+            self.ambience.loop = True
+            
         self.scare_sound = SoundLoader.load("dragon-studio-scary-scream-401725.mp3")
         if self.scare_sound:
             self.scare_sound.volume = 1
@@ -52,7 +57,7 @@ class JumpscareApp(App):
         self.layout.add_widget(self.status_label)
         self.layout.add_widget(self.start_button)
         self.scare_image.opacity = 0
-
+        self.ambience.play()
         return self.layout
 
     def start_jumpscare(self, instance):
