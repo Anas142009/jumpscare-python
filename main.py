@@ -22,6 +22,11 @@ class JumpscareApp(App):
         if self.scare_sound:
             self.scare_sound.volume = 1
             self.scare_sound.loop = False
+
+        self.glitch_sound = SoundLoader.load("glitch1.mp3")
+        if self.glitch_sound:
+            self.glitch_sound.volume = 1
+            self.glitch_sound.loop = True
         #preload the sound so that it doesn't cause lag and check if it's available before the button press to dismiss crashes.
         
         self.layout = FloatLayout()
@@ -53,7 +58,7 @@ class JumpscareApp(App):
             pos_hint={'right': 0.95, 'y': 0.05}
         )
 
-        self.start_button.bind(on_press=self.start_jumpscare)
+        self.start_button.bind(on_press=self.start_glitch)
         self.scare_image = Image(
             source='Polar Owl of Darknedd.jpeg', 
             size_hint=(1, 1), 
@@ -61,13 +66,43 @@ class JumpscareApp(App):
             allow_stretch=True,
             keep_ratio=False
         )
+        self.glitch_image = Image(
+            source='glitch.png', 
+            size_hint=(1, 1), 
+            pos_hint={'center_x': 0.5, 'center_y': 0.5},
+            allow_stretch=True,
+            keep_ratio=False
+        )
         self.layout.add_widget(self.status_label)
         self.layout.add_widget(self.start_button)
+        self.layout.add.widget(self.glitch_image)
+        self.glitch_image.opacity = 0
         self.layout.add_widget(self.scare_image)
         self.scare_image.opacity = 0
         if self.ambience:
             self.ambience.play()
+    def start_glitch(self, instance):
+        self.status_label.test = "Loading..."
+        self.start_button.disabled = True
+        Clock.schedule_once(self.trigger_glitch, 10)
+
+    def trigger_glitch(self, dt):
+        if self.glitch_sound:
+            self.glitch_sound.play()
+        self.glitch_image.opacity = 1
+        Clock.schedule_once(self.glitch_restart, 3.5)
+
+    def glitch_restart(self, dt):
+        self.glitch_sound.stop()
+        self.glitch_image.opacity = 0
+        self.start_button.disabled = False
+        self.start_button.unbind(on_press=self.start_glitch)
+        self.start_button.bind(on_press=self.start_jumpscare)
+        self.status_label.text = "An error has occured.\n\nPlease try again."
+        self.start_button.text = "Try again"
         
+        
+
     def start_jumpscare(self, instance):
         self.status_label.text = "Loading..."
         self.start_button.disabled = True
@@ -87,11 +122,11 @@ class JumpscareApp(App):
         
     def restart(self, dt):    
         self.scare_image.opacity = 0
-        self.start_button.text = "Try again"
+        self.start_button.text = "HAHAHAHA"
         self.start_button.disabled = False
         self.start_button.unbind(on_press=self.start_jumpscare)
-        self.start_button.bind(on_press=self.trigger_jumpscare)
-        self.status_label.text = "An error has occured. Please try again."
+        self.start_button.bind(on_press=self.start_glitch)
+        self.status_label.text = "Did I get you?"
 
 
 JumpscareApp().run()
