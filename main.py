@@ -59,7 +59,7 @@ class JumpscareApp(App):
         Clock.schedule_once(
             self.restart, 2.5
         )
-    def restart(self, dt)    
+    def restart(self, dt):    
         self.scare_image.opacity = 0
         self.start_button.text = "Start again"
         self.start_button.disabled = False
