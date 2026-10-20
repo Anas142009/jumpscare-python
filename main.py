@@ -7,7 +7,7 @@ from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.label import Label
 from kivy.uix.image import Image
-
+from kivy.core.audio import SoundLoader
 
 class JumpscareApp(App):
 
@@ -40,7 +40,7 @@ class JumpscareApp(App):
             size_hint=(1, 1), 
             pos_hint={'center_x': 0.5, 'center_y': 0.5},
             allow_stretch=True,
-            keep_ratio=True
+            keep_ratio=False
         )
         self.layout.add_widget(self.scare_image)
         self.layout.add_widget(self.status_label)
@@ -60,9 +60,16 @@ class JumpscareApp(App):
     def trigger_jumpscare(self, dt):
         self.status_label.text = "BOO!"
         self.scare_image.opacity = 1
+        self.play_audio
         Clock.schedule_once(
-            self.restart, 2.5
+            self.restart, 3.5
         )
+    def play_audio(self, instance):
+        sound = SoundLoader.load("dragon-studio-scary-scream-401725.mp3")
+        sound.volume = 1
+        sound.loop = False
+
+        sound.play()
     def restart(self, dt):    
         self.scare_image.opacity = 0
         self.start_button.text = "Start again"
