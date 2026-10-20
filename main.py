@@ -63,9 +63,9 @@ class JumpscareApp(App):
         )
 
     def trigger_jumpscare(self, dt):
-        self.status_label.text = "BOO!"
-        self.scare_image.opacity = 1
         self.play_audio() # Remember the parenthesis()
+        self.scare_image.opacity = 1
+        self.status_label.text = "BOO!"
         Clock.schedule_once(
             self.restart, 3.5
         )
