@@ -30,16 +30,39 @@ class JumpscareApp(App):
         #preload the sound so that it doesn't cause lag and check if it's available before the button press to dismiss crashes.
         
         self.layout = FloatLayout()
+        self.lang_label= Label(
+            text="Choose a language./اختر لغة.",
+            font_size="24sp",
+            halign="center",
+            pos_hint={'center_x': 0.5, 'center_y': 0.65}
+        )
+        
+        self.En_button= Button(
+            text="English",
+            font_size="24sp",
+            size_hint=(1, 0.06),
+            pos_hint={'center_x': 0.5, 'center_y': 0.55}
+        )
+        
+        self.En_button.bind(on_press=self.declare_warning)
+        self.layout.add_widget(self.lang_label)
+        self.layout.add_widget(self.En_button)
+
+        return self.layout
+    def declare_warning(self, instance):  
+        self.layout.clear_widgets()
+        
         self.warning_label = Label(
             text="WARNING\n\nThis experience contains loud noises, flashing lights and images.\n\nViewer discretion is advised.",
             font_size="24sp",
             halign="center",
             pos_hint={'center_x': 0.5, 'center_y': 0.5}
         )
+        
         self.layout.add_widget(self.warning_label)
         Clock.schedule_once(self.load_main_game, 3.5)
         
-        return self.layout
+        
         
     def load_main_game(self, dt):
         self.layout.clear_widgets()
@@ -48,7 +71,7 @@ class JumpscareApp(App):
             text="version 0.1.0",
             font_size="12sp",
             size_hint=(0.15, 0.15),
-            pos_hint={'right': 0.95, 'y': 0.95}
+            pos_hint={'right': 0.95, 'top': 0.95}
         )
         self.status_label = Label(
             text="Press Start to continue.",
@@ -61,7 +84,7 @@ class JumpscareApp(App):
         self.start_button = Button(
             text="Start",
             font_size="24sp",
-            size_hint=(1, 0.1),
+            size_hint=(1, 0.04),
             pos_hint={'right': 0.95, 'y': 0.05}
         )
 
