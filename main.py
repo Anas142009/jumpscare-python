@@ -125,11 +125,13 @@ class JumpscareApp(App):
         if self.scare_sound:
             self.scare_sound.play()
             self.ambience.stop() # Remember the parenthesis()
-        self.scare_image.opacity = 1
+        Clock.schedule_once(self.show_image, 0.25)
         
         Clock.schedule_once(
             self.restart, 3.2
         )
+    def show_image(self, dt):
+        self.scare_image.opacity = 1
         
     def restart(self, dt):    
         self.ambience.play()
