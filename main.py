@@ -30,12 +30,13 @@ class JumpscareApp(App):
         #preload the sound so that it doesn't cause lag and check if it's available before the button press to dismiss crashes.
         
         self.layout = FloatLayout()
-        slef.warning_label = Label(
+        self.warning_label = Label(
             text="WARNING\n\nThis experience contains loud noises, flashing lights and images.\n\nViewer discretion is advised.",
             font_size="24sp",
             halign="center",
             pos_hint={'center_x': 0.5, 'center_y': 0.5}
         )
+        self.layout.add_widget(self.warning_label)
         Clock.schedule_once(self.load_main_game, 3.5)
         
         return self.layout
