@@ -83,14 +83,14 @@ class JumpscareApp(App):
         self.layout.add_widget(self.version_label)
         self.layout.add_widget(self.status_label)
         self.layout.add_widget(self.start_button)
-        self.layout.add.widget(self.glitch_image)
+        self.layout.add_widget(self.glitch_image)
         self.glitch_image.opacity = 0
         self.layout.add_widget(self.scare_image)
         self.scare_image.opacity = 0
         if self.ambience:
             self.ambience.play()
     def start_glitch(self, instance):
-        self.status_label.test = "Loading..."
+        self.status_label.text = "Loading..."
         self.start_button.disabled = True
         Clock.schedule_once(self.trigger_glitch, 10)
 
