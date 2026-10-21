@@ -42,9 +42,15 @@ class JumpscareApp(App):
         
     def load_main_game(self, dt):
         self.layout.clear_widgets()
-        
+
+        self.version_label = Label(
+            text="version 0.1.0",
+            font_size="12sp",
+            size_hint=(0.15, 0.15),
+            pos_hint={'right': 0.95, 'y': 0.95}
+        )
         self.status_label = Label(
-            text="Ready when you are!",
+            text="Press Start to continue.",
             font_size="24sp",
             size_hint_y=None,
             height=50,
@@ -73,6 +79,7 @@ class JumpscareApp(App):
             allow_stretch=True,
             keep_ratio=False
         )
+        self.layout.add_widget(self.version_label)
         self.layout.add_widget(self.status_label)
         self.layout.add_widget(self.start_button)
         self.layout.add.widget(self.glitch_image)
@@ -89,11 +96,13 @@ class JumpscareApp(App):
     def trigger_glitch(self, dt):
         if self.glitch_sound:
             self.glitch_sound.play()
+            self.ambience.stop()
         self.glitch_image.opacity = 1
-        Clock.schedule_once(self.glitch_restart, 3.5)
+        Clock.schedule_once(self.glitch_restart, 2.3)
 
     def glitch_restart(self, dt):
         self.glitch_sound.stop()
+        self.ambience.play()
         self.glitch_image.opacity = 0
         self.start_button.disabled = False
         self.start_button.unbind(on_press=self.start_glitch)
@@ -113,16 +122,18 @@ class JumpscareApp(App):
 
     def trigger_jumpscare(self, dt):
         if self.scare_sound:
-            self.scare_sound.play()  # Remember the parenthesis()
+            self.scare_sound.play()
+            self.ambience.stop() # Remember the parenthesis()
         self.scare_image.opacity = 1
-        self.status_label.text = "BOO!"
+        
         Clock.schedule_once(
-            self.restart, 3.5
+            self.restart, 3.2
         )
         
     def restart(self, dt):    
+        self.ambience.play()
         self.scare_image.opacity = 0
-        self.start_button.text = "HAHAHAHA"
+        self.start_button.text = "Reboot"
         self.start_button.disabled = False
         self.start_button.unbind(on_press=self.start_jumpscare)
         self.start_button.bind(on_press=self.start_glitch)
