@@ -7,7 +7,7 @@ package.domain = org.example
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,wav,mp3,jpeg
 version = 0.1.0
-requirements = python3,kivy
+requirements = python3,kivy,arabic-reshaper,python-bidi
 orientation = portrait
 fullscreen = 0
 
