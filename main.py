@@ -83,7 +83,7 @@ class JumpscareApp(App):
         self.layout.clear_widgets()
         
         if self.language == "ar":
-            warning_text = self.format_arabic("تحذير\n\nهذه التجربة تحتوي على أصوات عالية، أضواء وامضة وصور مزعجة.\n\nينصح بتقدير المشاهد.")
+            warning_text = self.format_arabic("تحذير\n\nهذه التجربة تحتوي على أصوات\n عالية، أضواء وامضة، وصور مزعجة.\n\nينصح بإغلاق التطبيق إن كنت\nتعاني من نوبات صرع أو\nمشاكل صحية.")
             font = self.arabic_font
         else:
             warning_text = "WARNING\n\nThis experience contains loud noises, flashing lights and images.\n\nViewer discretion is advised."
@@ -208,15 +208,19 @@ class JumpscareApp(App):
         self.ambience.play()
         self.scare_image.opacity = 0
         
-        reboot_text = self.format_arabic("إعادة تشغيل") if self.language == "ar" else "Reboot"
-        self.start_button.text = reboot_text
+        exit_text = self.format_arabic("خروج") if self.language == "ar" else "Exit"
+        self.start_button.text = exit_text
         self.start_button.disabled = False
         
         self.start_button.unbind(on_press=self.start_jumpscare)
-        self.start_button.bind(on_press=self.start_glitch)
+        self.start_button.bind(on_press=self.close_app)
         
         gotcha_text = self.format_arabic("هل أخفتك؟") if self.language == "ar" else "Did I get you?"
         self.status_label.text = gotcha_text
+        
+    def close_app(self, instance):
+        self.stop()
+        
 
 if __name__ == "__main__":
     JumpscareApp().run()
