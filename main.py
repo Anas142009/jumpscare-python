@@ -99,7 +99,7 @@ class JumpscareApp(App):
         )
         
         self.layout.add_widget(self.warning_label)
-        Clock.schedule_once(self.load_main_game, 3.5)
+        Clock.schedule_once(self.load_main_game, 5)
         
     def load_main_game(self, dt):
         self.layout.clear_widgets()
@@ -107,7 +107,7 @@ class JumpscareApp(App):
         font = self.arabic_font if self.language == "ar" else "Roboto"
 
         self.version_label = Label(
-            text="version 0.1.0",
+            text="version 1.0",
             font_size="12sp",
             size_hint=(0.15, 0.15),
             pos_hint={'right': 0.95, 'top': 0.95}
