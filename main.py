@@ -20,7 +20,7 @@ class JumpscareApp(App):
 
     def build(self):
         self.language = "en" # Default language
-        self.arabic_font = os.path.join(os.path.dirname(__file__), "ARIAL.TTF") # Ensure this file is in your directory
+        self.arabic_font = "ARIAL.TTF" # Ensure this file is in your directory
 
         self.ambience = SoundLoader.load("Ambience.mp3")
         if self.ambience:
